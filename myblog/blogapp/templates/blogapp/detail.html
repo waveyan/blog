@@ -1,0 +1,86 @@
+{% extends 'blogapp/base.html' %}
+{% load staticfiles %}
+{% block title %}
+每天一文
+{% endblock %}
+{% block script %}
+{# 相当super() #}
+{{block.super}}
+<style>
+p{
+text-indent: 2em; /*em是相对单位，2em即现在一个字大小的两倍*/
+text-align: justify;
+font-style: normal;
+line-height: 40px;
+}
+</style>
+{% endblock %}
+{% block page_content %}
+	<div class="container">
+	  	 <section class="tm-section">
+            <div class="container-fluid">
+                <div class="row">
+
+                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9 col-xl-9">
+                        <div class="tm-blog-post">
+                            <h3 class="tm-gold-text">{{post.title}}</h3>
+                            {{post.excerpt}}
+                            <img src="{%static 'storage/'%}{{post.pic}}" alt="Image" class="img-fluid tm-img-post" width="750">
+                            <p>{{ post.body }}</p>
+                        </div>
+                    </div>
+
+                    <aside class="col-xs-12 col-sm-12 col-md-4 col-lg-3 col-xl-3 tm-aside-r">
+
+                        <div class="tm-aside-container">
+                            <h3 class="tm-gold-text tm-title">
+                                目录
+                            </h3>
+                            <nav>
+                                <ul class="nav">
+                                {% for category in categories %}
+                                    <li><a href="#" class="tm-text-link">{{category.name|default:"暂无"}}</a></li>
+                                {% endfor %}
+                                </ul>
+                            </nav>
+                            <hr class="tm-margin-t-small">   
+                            <h3 class="tm-gold-text tm-title tm-margin-t-small">
+                                Useful Links
+                            </h3>
+                            <nav>   
+                                <ul class="nav">
+                                    <li><a href="#" class="tm-text-link">Suspendisse sed dui nulla</a></li>
+                                    <li><a href="#" class="tm-text-link">Lorem ipsum dolor sit</a></li>
+                                    <li><a href="#" class="tm-text-link">Duiss nec purus et eros</a></li>
+                                    <li><a href="#" class="tm-text-link">Etiam pulvinar et ligula sed</a></li>
+                                    <li><a href="#" class="tm-text-link">Proin egestas eu felis et iaculis</a></li>
+                                </ul>
+                            </nav>   
+                            <hr class="tm-margin-t-small"> 
+
+                            <div class="tm-content-box tm-margin-t-small">
+                                <a href="#" class="tm-text-link"><h4 class="tm-margin-b-20 tm-thin-font">Duis sit amet tristique #1</h4></a>
+                                <p class="tm-margin-b-30">Vestibulum arcu erat, lobortis sit amet tellus ut, semper tristique nibh. Nunc in molestie elit.</p>
+                            </div>
+                            <hr class="tm-margin-t-small">
+                            <div class="tm-content-box tm-margin-t-small">
+                                <a href="#" class="tm-text-link"><h4 class="tm-margin-b-20 tm-thin-font">Duis sit amet tristique #2</h4></a>
+                                <p>Vestibulum arcu erat, lobortis sit amet tellus ut, semper tristique nibh. Nunc in molestie elit.</p>
+                            </div>  
+                            <hr class="tm-margin-t-small">
+                            <div class="tm-content-box tm-margin-t-small">
+                                <a href="#" class="tm-text-link"><h4 class="tm-margin-b-20 tm-thin-font">Duis sit amet tristique #3</h4></a>
+                                <p>Vestibulum arcu erat, lobortis sit amet tellus ut, semper tristique nibh. Nunc in molestie elit.</p>
+                            </div>      
+                        </div>
+                        
+                        
+                    </aside>
+
+                </div>
+                
+            </div>
+        </section>
+        </div>
+
+{% endblock %}

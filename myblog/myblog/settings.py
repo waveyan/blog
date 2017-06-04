@@ -24,8 +24,8 @@ SECRET_KEY = 'c+!ex_1-)t9!1g15dn66rtlqf_m=89bg35!oo_a9oj%+_5-_5h'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-ALLOWED_HOSTS = []
+#开放ip
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'blogapp',
 ]
 
 MIDDLEWARE = [
@@ -72,11 +73,16 @@ WSGI_APPLICATION = 'myblog.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
-
+#使用mysql
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'blog',
+        'USER': 'root',
+        'PASSWORD':'mysql',
+        'HOST':'localhost',
+        'PORT':'3306',
+        'CHARSET':'utf8',
     }
 }
 
@@ -102,9 +108,9 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
-
-LANGUAGE_CODE = 'en-us'
-
+#中文
+LANGUAGE_CODE = 'zh-hans'
+#中国时区，UTC是相当英国伦敦时区
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
@@ -113,6 +119,8 @@ USE_L10N = True
 
 USE_TZ = True
 
+#上传文件路径
+MEDIA_ROOT=os.path.join(BASE_DIR,'storage')
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
