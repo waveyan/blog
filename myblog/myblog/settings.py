@@ -23,7 +23,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'c+!ex_1-)t9!1g15dn66rtlqf_m=89bg35!oo_a9oj%+_5-_5h'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+#关闭后没有输出错误信息吧
+DEBUG = False
 #开放ip
 ALLOWED_HOSTS = ['*']
 
@@ -111,12 +112,12 @@ AUTH_PASSWORD_VALIDATORS = [
 #中文
 LANGUAGE_CODE = 'zh-hans'
 #中国时区，UTC是相当英国伦敦时区
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
 USE_L10N = True
-
+#
 USE_TZ = True
 
 #上传文件路径
@@ -126,3 +127,5 @@ MEDIA_ROOT=os.path.join(BASE_DIR,'storage')
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+#nginx处理静态文件请求，指明静态文件的收集目录
+STATIC_ROOT=os.path.join(BASE_DIR,'static')

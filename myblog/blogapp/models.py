@@ -38,6 +38,16 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
+    #def get_absolute_url(self):redirect
+
+    #python类有继承需要带括号，没有括号默认继承object类
+    class Meta:
+        '''指定默认的排序属性,Post.objects.all()时效果等同Post.objects.all().order_by('-created_time')'''
+        ordering=['-created_time','title']
+
+
+
+
 class Url(models.Model):
     name=models.CharField('url名称',max_length=100)
     url=models.CharField('url',max_length=200)
@@ -45,3 +55,14 @@ class Url(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Sentence(models.Model):
+    sentence=models.TextField('美句',max_length=500)
+    created_time=models.DateTimeField('收入时间')
+    originate_from=models.CharField('出自',max_length=50,blank=True)
+
+    def __str__(self):
+        return self.sentence
+
+

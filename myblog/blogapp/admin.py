@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Post,Category,Tag,Url
+from .models import Post,Category,Tag,Url,Sentence
 
 class PostInline(admin.StackedInline):
     '''在category里编辑1篇文章'''
@@ -25,7 +25,14 @@ class UrlAdmin(admin.ModelAdmin):
     list_display=['name','url','created_time']
     list_filter=['created_time']
 
+class SentenceAdmin(admin.ModelAdmin):
+    search_field=['sentence','originate_from']
+    list_display=['sentence','originate_from','created_time']
+    list_filter=['created_time','originate_from']
+
+
 admin.site.register(Post,PostAdmin)
 admin.site.register(Category,CategoryAdmin)
 admin.site.register(Tag,TagAdmin)
 admin.site.register(Url,UrlAdmin)
+admin.site.register(Sentence,SentenceAdmin)

@@ -91,8 +91,10 @@
     <div class="testimonial wow bounceIn" data-wow-delay="0.0s" id="faq">
 	  <div class="container">
 	   <div class="test_wrap">
-		<p><span class="quotes"></span>consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.<span class="quotes-down"></span></p>
-        <h4>-John Doe-</h4>
+		<p><span class="quotes"></span>{% get_sentence as sentence %}
+    {{sentence.sentence}}
+    <span class="quotes-down"></span></p>
+        <h4>-{{sentence.originate_from}}-</h4>
         <div class="clearfix"> </div>
       </div>
       </div>
@@ -126,7 +128,7 @@
                             <p class="m-b-2"> Ut fringilla lacus ac tempor ullamcorper. Mauris iaculis placerat ex et mattis. Mauris id vulputate lectus, id fermentum sapien.
                             </p>
 
-                            <a href="#" class="tm-btn text-uppercase">Read More</a>
+                            <!-- <a href="#" class="tm-btn text-uppercase">Read More</a> -->
 
                         </div>
                     </div>

@@ -68,12 +68,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 {% block page_content %}
 {% endblock %}
 {% block footer %}
+<div class="clearfix"> </div>
    <div class="footer">
    	 <div class="container">
    	 	<div class="footer_nav1">
 			<ul>
-	        	<li><a href="index.html">Home</a></li>
-	        	<li><a href="about.html">About</a></li>
+			<li class="active"><a href="{%url 'blogapp:index' %}">首页</a></li>
+            <li><a href="{% url 'blogapp:detail' 2%}">每天一文</a></li>
 	        	<li><a href="gallery.html">Gallery</a></li>
 	        	<!-- logo -->
 <!-- 	        	 <li class="logo"><a href="index.html"><img src="{%static 'blogapp/images/logo.png'%}" alt=""/></a></li> -->
