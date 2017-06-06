@@ -24,7 +24,7 @@ SECRET_KEY = 'c+!ex_1-)t9!1g15dn66rtlqf_m=89bg35!oo_a9oj%+_5-_5h'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 #关闭后没有输出错误信息吧
-DEBUG = False
+DEBUG = True
 #开放ip
 ALLOWED_HOSTS = ['*']
 
@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blogapp',
+    'comments',
 ]
 
 MIDDLEWARE = [
@@ -127,5 +128,5 @@ MEDIA_ROOT=os.path.join(BASE_DIR,'storage')
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
-#nginx处理静态文件请求，指明静态文件的收集目录
-STATIC_ROOT=os.path.join(BASE_DIR,'static')
+##nginx处理静态文件请求，指明静态文件的收集目录
+#STATIC_ROOT=os.path.join(BASE_DIR,'static')

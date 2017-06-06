@@ -1,5 +1,7 @@
 {% extends 'blogapp/base.html' %}
 {% load staticfiles %}
+
+
 {% block title %}
 每天一文
 {% endblock %}
@@ -28,10 +30,29 @@ line-height: 40px;
                             <img src="{%static 'storage/'%}{{post.pic}}" alt="Image" class="img-fluid tm-img-post" width="750">
                             <p>{{ post.body }}</p>
                         </div>
+                <div class="contact-form">
+                <div class="col-md-12 contact-grid">
+                        <form action="{% url 'comments:post_comment' post.pk %}" method="POST">
+                            {% csrf_token %}
+                            {{commentform.text}}
+                            {{commentform.errors}}
+                            <input type="submit" name="submit" value="评论">
+                        </form>
+                </div>
+                </div><!--end contact-form-->
+                <h1></h1>
+                <div class="clearfix"> </div>
+                <hr class="tm-margin-t-small"> 
+                        {% for comment in comments %}
+                            <div class="tm-margin-t-small" align="left">
+                               <h4 class="tm-margin-b-20 tm-thin-font">来自 {{comment.city}} 的网友：{{comment.ip}}</h4>
+                                    <p class="tm-margin-b-30" align="left">{{comment.text}}</p>
+                            </div>
+                            <hr class="tm-margin-t-small">
+                            {% endfor %}
                     </div>
 
                     <aside class="col-xs-12 col-sm-12 col-md-4 col-lg-3 col-xl-3 tm-aside-r">
-
                         <div class="tm-aside-container">
                             <h3 class="tm-gold-text tm-title">
                                 目录
@@ -45,42 +66,19 @@ line-height: 40px;
                             </nav>
                             <hr class="tm-margin-t-small">   
                             <h3 class="tm-gold-text tm-title tm-margin-t-small">
-                                Useful Links
+                                最近文章
                             </h3>
                             <nav>   
                                 <ul class="nav">
-                                    <li><a href="#" class="tm-text-link">Suspendisse sed dui nulla</a></li>
-                                    <li><a href="#" class="tm-text-link">Lorem ipsum dolor sit</a></li>
-                                    <li><a href="#" class="tm-text-link">Duiss nec purus et eros</a></li>
-                                    <li><a href="#" class="tm-text-link">Etiam pulvinar et ligula sed</a></li>
-                                    <li><a href="#" class="tm-text-link">Proin egestas eu felis et iaculis</a></li>
+                                {% for p in posts %}
+                                    <li><a href="{{post.get_absolute_url}}" class="tm-text-link">{{p.title}}</a></li>
+                                {% endfor %}
                                 </ul>
                             </nav>   
-                            <hr class="tm-margin-t-small"> 
-
-                            <div class="tm-content-box tm-margin-t-small">
-                                <a href="#" class="tm-text-link"><h4 class="tm-margin-b-20 tm-thin-font">Duis sit amet tristique #1</h4></a>
-                                <p class="tm-margin-b-30">Vestibulum arcu erat, lobortis sit amet tellus ut, semper tristique nibh. Nunc in molestie elit.</p>
-                            </div>
-                            <hr class="tm-margin-t-small">
-                            <div class="tm-content-box tm-margin-t-small">
-                                <a href="#" class="tm-text-link"><h4 class="tm-margin-b-20 tm-thin-font">Duis sit amet tristique #2</h4></a>
-                                <p>Vestibulum arcu erat, lobortis sit amet tellus ut, semper tristique nibh. Nunc in molestie elit.</p>
-                            </div>  
-                            <hr class="tm-margin-t-small">
-                            <div class="tm-content-box tm-margin-t-small">
-                                <a href="#" class="tm-text-link"><h4 class="tm-margin-b-20 tm-thin-font">Duis sit amet tristique #3</h4></a>
-                                <p>Vestibulum arcu erat, lobortis sit amet tellus ut, semper tristique nibh. Nunc in molestie elit.</p>
-                            </div>      
                         </div>
-                        
-                        
                     </aside>
-
                 </div>
-                
             </div>
         </section>
         </div>
-
 {% endblock %}

@@ -19,7 +19,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link href="{%static 'blogapp/css/style.css'%}" rel='stylesheet' type='text/css' />
 <!-- Custom Theme files -->
 <!--webfont-->
-<link href='http://fonts.useso.com/css?family=Roboto+Slab:100,300,400,700' rel='stylesheet' type='text/css'>
+<!-- <link href='http://fonts.useso.com/css?family=Roboto+Slab:100,300,400,700' rel='stylesheet' type='text/css'> -->
     <script type="text/javascript" src="{%static 'blogapp/js/jquery-1.11.1.min.js'%}"></script>
 <!----//requred-js-files---->
 <link rel="stylesheet" href="{%static 'blogapp/css/templatemo-style.css'%}">
@@ -31,13 +31,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<div class="container">
 	        <!---start-top-nav---->
 			<div class="top-nav">
-				<div class="top-header">
+<!-- 				<div class="top-header">
 					<div class="logo">
 					   <a href="index.html"><img src="images/logo.png" alt=""/></a>
 					</div>
-				</div>
+				</div> -->
 				<nav class="nav1">
-					<a id="menu-toggle" class="anchor-link" href="#"><img src="images/nav.png" alt="" /></a>
+					<a id="menu-toggle" class="anchor-link" href="#"><img src="{%static 'blogapp/images/nav.png' %}" alt="" /></a>
 					<ul class="simple-toggle" id="menu">
 			        	 <li class="active"><a href="{%url 'blogapp:index' %}">首页</a></li>
 			        	<li class="active"><a href="about.html">每天一文</a></li>

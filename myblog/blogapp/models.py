@@ -1,6 +1,7 @@
 from django.db import models
 #Django内置应用，专门用于处理网站用户的注册、登陆等流程。
 from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
 
 #文章类别，id不写，自动生成,默认为主键
 class Category(models.Model):
@@ -38,7 +39,9 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
-    #def get_absolute_url(self):redirect
+    def get_absolute_url(self):
+        '''相当于url_for,自带pk,kwargs可随意，只要是dict就可以'''
+        return reverse('blogapp:detail',kwargs={'pk':self.pk})
 
     #python类有继承需要带括号，没有括号默认继承object类
     class Meta:
