@@ -13,7 +13,7 @@ class Comment(models.Model):
         return self.ip+':'+self.city+':'+self.text
 
     class Meta:
-        ordering=['-created_time']
+        ordering=['created_time']
 
 
 

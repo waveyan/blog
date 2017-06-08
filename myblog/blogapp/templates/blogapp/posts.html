@@ -1,0 +1,35 @@
+{% extends 'blogapp/base.html' %} {% load staticfiles %} {% block title %} 文章 {% endblock %} {% block page_content %}
+<section class="tm-section">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9 col-xl-9">
+                <div>
+                    {% for post in posts %}
+                    <div class="media-body">
+                        <a href="{{post.get_absolute_url}}"><h4 class="media-heading tm-gold-text tm-margin-b-15" style="display: inline;">{{post.title}}</h4></a> {% for tag in post.tags.all%} {{tag}}&nbsp; {% endfor %} 阅读:{{post.read}}&nbsp;评论:{{post.comment_num}}
+                        <p class="tm-small-font tm-media-description">{{post.excerpt}}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+                <h1></h1>
+                <div class="clearfix"> </div>
+            </div>
+            <aside class="col-xs-12 col-sm-12 col-md-4 col-lg-3 col-xl-3 tm-aside-r">
+                <div class="tm-aside-container">
+                    <h3 class="tm-gold-text tm-title">
+                                目录
+                            </h3>
+                    <nav>
+                        <ul class="nav">
+                            {% for category in categories %}
+                            <li><a href="{% url 'blogapp:get_post_with_category' category.id %}" class="tm-text-link">{{category.name|default:"暂无"}}({{category.post_num}})</a></li>
+                            {% endfor %}
+                        </ul>
+                    </nav>
+                    <hr class="tm-margin-t-small">
+                </div>
+            </aside>
+        </div>
+    </div>
+</section>
+{% endblock %}

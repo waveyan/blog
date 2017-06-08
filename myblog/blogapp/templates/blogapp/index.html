@@ -1,218 +1,165 @@
-{# 都是以template为参考点 #}
-{% extends 'blogapp/base.html' %}
-{%load staticfiles%}
-{# 载入自定义标签mytags.py #}
-{%load mytags %}
-
-{% block title %}
-首页
-{% endblock %}
-{% block nav %}
+{# 都是以template为参考点 #} {% extends 'blogapp/base.html' %} {%load staticfiles%} {# 载入自定义标签mytags.py #} {%load mytags %} {% block title %} 首页 {% endblock %} {% block nav %}
 <div class="header">
-  <div class="container">
-          <!---start-top-nav---->
-      <div class="top-nav">
-        <div class="top-header">
-          <div class="logo">
-             <a href="index.html"><img src="{%static 'blogapp/images/logo.png'%}" alt=""/></a>
-          </div>
-        </div>
-        <nav class="nav1">
-          <a id="menu-toggle" class="anchor-link" href="#"><img src="{%static 'blogapp/images/nav.png'%}" alt="" /></a>
-          <ul class="simple-toggle" id="menu">
-                <li class="active"><a href="{%url 'blogapp:index' %}">首页</a></li>
-                <li><a href="{% url 'blogapp:detail' 2%}">每天一文</a></li>
-                <li><a href="gallery.html">Gallery</a></li>
-                <!-- logo -->
-<!--                 <li class="logo"><a href="index.html"><img src="{%static 'blogapp/images/logo.png'%}" alt=""/></a></li> -->
-                <!-- logo -->
-                <li><a href="faq.html">Faq</a></li>
-                <li><a href="typography.html">Services</a></li>
-                <li><a href="contact.html">Contact</a></li>
-              </ul>
-        </nav>
-        <div class="clearfix"> </div>
-        <script type="text/javascript">
+    <div class="container">
+        <!---start-top-nav---->
+        <div class="top-nav">
+            <div class="top-header">
+                <div class="logo">
+                    <a href="index.html"><img src="{%static 'blogapp/images/logo.png'%}" alt="" /></a>
+                </div>
+            </div>
+            <nav class="nav1">
+                <a id="menu-toggle" class="anchor-link" href="#"><img src="{%static 'blogapp/images/nav.png'%}" alt="" /></a>
+                <ul class="simple-toggle" id="menu">
+                    <li class="active"><a href="{%url 'blogapp:index' %}">首页</a></li>
+                    <li><a href="{% url 'blogapp:posts' %}">文章</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <!-- logo -->
+                    <!--                 <li class="logo"><a href="index.html"><img src="{%static 'blogapp/images/logo.png'%}" alt=""/></a></li> -->
+                    <!-- logo -->
+                    <li><a href="faq.html">Faq</a></li>
+                    <li><a href="typography.html">Services</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="clearfix"> </div>
+            <script type="text/javascript">
             $(document).ready(function() {
-          
-            $('#menu-toggle').click(function () {
-                $('#menu').toggleClass('open');
-                e.preventDefault();
-              });
-              
-          });
-        </script>
-      </div>
-    <!---End-top-nav---->
-  </div>
+
+                $('#menu-toggle').click(function() {
+                    $('#menu').toggleClass('open');
+                    e.preventDefault();
+                });
+
+            });
+            </script>
+        </div>
+        <!---End-top-nav---->
+    </div>
 </div>
-{% endblock %}
-{% block page_content %}
-		<div class="about">
-		  <div class="container">
-			<div class="col-md-6 about_left">
-				<h1 class="brand_1">About</h1>
-				<img src="{%static 'blogapp/images/1.png'%}" class="img-responsive" alt=""/>
-	            <div class="triangle1 bg-secondary"><span>quis nostrud <br> litterarum formas humanitatis</span></div>
-	        </div>
-			<div class="col-md-6 about_right wow fadeInUp" data-wow-delay="0.0s">
-			  <div class="about_text">
-				<h1>Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip</h1>
-				<p>Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima. Eodem modo typi, qui nunc nobis videntur parum clari, fiant sollemnes </p>
-			    <p>Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima. Eodem modo typi, qui nunc nobis videntur parum clari, fiant sollemnes </p>
-			  </div>
-			 </div>
-			 <div class="clearfix"> </div>
-		</div> 
-      </div>  
-	<div class="box_1">
-     <div class="container">
-      <div class="col-md-4 col_1">
-      	<h4>01/</h4>
-      	<h5>There are many variations of passages</h5>
-      	<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
-      	<a href="#" class="btn_2" title="Error sit">more &raquo;</a>
-      </div>
-      <div class="col-md-4 col_1">
-      	<h4>02/</h4>
-      	<h5>There are many variations of passages</h5>
-      	<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
-      	<a href="#" class="btn_2" title="Error sit">more &raquo;</a>
-      </div>
-      <div class="col-md-4 col_1">
-      	<h4>03/</h4>
-      	<h5>There are many variations of passages</h5>
-      	<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
-      	<a href="#" class="btn_2" title="Error sit">more &raquo;</a>
-      </div>
-      <div class="clearfix"> </div>
-     </div>
+{% endblock %} {% block page_content %}
+<div class="box_1">
+    <div class="container">
+        <h4 align="right"><a href="#"><span class="glyphicon glyphicon-repeat"></span></a></h4>
+        <div class="col-md-4 col_1">
+            <h5 style="color: #cc9900;font-size: 1.65rem;">莉莉安</h5>
+            <img width="150" height="150" src="{%static 'blogapp/images/music1.jpg'%}" alt="Generic placeholder image" />
+            <img width="150" height="150" src="http://www.xiami.com/qrcode?u=http://www.xiami.com/album/2100175745?rf=promotion" alt="Generic placeholder image" />
+            <br>填词：宋冬野&nbsp;&nbsp;谱曲：宋冬野
+            <br>编曲：宋冬野&nbsp;&nbsp;原唱：宋冬野
+        </div>
+        <div class="col-md-4 col_1">
+            <h5 style="color: #cc9900;font-size: 1.65rem;">莉莉安</h5>
+            <img width="150" height="150" src="{%static 'blogapp/images/music1.jpg'%}" alt="Generic placeholder image" />
+            <img width="150" height="150" src="http://www.xiami.com/qrcode?u=http://www.xiami.com/album/2100175745?rf=promotion" alt="Generic placeholder image" />
+            <br>填词：宋冬野&nbsp;&nbsp;谱曲：宋冬野
+            <br>编曲：宋冬野&nbsp;&nbsp;原唱：宋冬野
+        </div>
+        <div class="col-md-4 col_1">
+            <h5 style="color: #cc9900;font-size: 1.65rem;">莉莉安</h5>
+            <img width="150" height="150" src="{%static 'blogapp/images/music1.jpg'%}" alt="Generic placeholder image" />
+            <img width="150" height="150" src="http://www.xiami.com/qrcode?u=http://www.xiami.com/album/2100175745?rf=promotion" alt="Generic placeholder image" />
+            <br>填词：宋冬野&nbsp;&nbsp;谱曲：宋冬野
+            <br>编曲：宋冬野&nbsp;&nbsp;原唱：宋冬野
+        </div>
     </div>
-    <div class="testimonial wow bounceIn" data-wow-delay="0.0s" id="faq">
-	  <div class="container">
-	   <div class="test_wrap">
-     {#调用get_sentence标签（mytags.py中get_sentence函数）通过as把返回的存于sentence中,且标签需在block中才执行#}
-     {% get_sentence as sentence %}
-		<p><span class="quotes"></span>
-    {{sentence.sentence}}
-    <span class="quotes-down"></span></p>
-        <h4>-{{sentence.originate_from}}-</h4>
-        <div class="clearfix"> </div>
-      </div>
-      </div>
+</div>
+<div class="testimonial wow bounceIn" data-wow-delay="0.0s" id="faq">
+    <div class="container">
+        <div class="test_wrap">
+            {#调用get_sentence标签（mytags.py中get_sentence函数）通过as把返回的存于sentence中,且标签需在block中才执行#} {% get_sentence as sentence %}
+            <p><span class="quotes"></span> {{sentence.sentence}}
+                <span class="quotes-down"></span></p>
+            <h4>-{{sentence.originate_from}}-</h4>
+            <div class="clearfix"> </div>
+        </div>
     </div>
-   	</div>
-   </div>
-
-     <div class="container">
-
-     				<div class="row tm-margin-t-big">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
-                        <div class="tm-2-col-left">
-                            
-                            <h3 class="tm-gold-text tm-title">Pellentesque fermentum mauris et posuere</h3>
-                            <p class="tm-margin-b-30">最人气文章</p>
-                            <img src="{%static 'blogapp/images/tm-img-660x330-1.jpg'%}" alt="Image" class="tm-margin-b-20 img-fluid" width="550">
-                            <p>
-                                Donec tempor lobortis tortor, in feugiat massa facilisis sed. Ut dignissim viverra pretium. In eu justo maximus turpis feugiat finibus scelerisque nec eros. Cras nec lectus tempor nibh vestibulum eleifend et ac elit.
-                            </p>
-                            <p>Morbi vel pharetra massa, non iaculis tortor. Nulla porttitor tincidunt felis et feugiat. Vivamus fermentum ligula justo, sit amet blandit nisl volutpat id. Fusce sagittis ultricies felis, non luctus mauris lacinia quis.</p>
-                            <p class="m-b-2"> Ut fringilla lacus ac tempor ullamcorper. Mauris iaculis placerat ex et mattis. Mauris id vulputate lectus, id fermentum sapien.
-                            </p>
-                                                        <p>
-                                Donec tempor lobortis tortor, in feugiat massa facilisis sed. Ut dignissim viverra pretium. In eu justo maximus turpis feugiat finibus scelerisque nec eros. Cras nec lectus tempor nibh vestibulum eleifend et ac elit.
-                            </p>
-                            <p>Morbi vel pharetra massa, non iaculis tortor. Nulla porttitor tincidunt felis et feugiat. Vivamus fermentum ligula justo, sit amet blandit nisl volutpat id. Fusce sagittis ultricies felis, non luctus mauris lacinia quis.</p>
-                                                        <p>
-                                Donec tempor lobortis tortor, in feugiat massa facilisis sed. Ut dignissim viverra pretium. In eu justo maximus turpis feugiat finibus scelerisque nec eros. Cras nec lectus tempor nibh vestibulum eleifend et ac elit.
-                            </p>
-                            <p>Morbi vel pharetra massa, non iaculis tortor. Nulla porttitor tincidunt felis et feugiat. Vivamus fermentum ligula justo, sit amet blandit nisl volutpat id. Fusce sagittis ultricies felis, non luctus mauris lacinia quis.</p>
-                            <p class="m-b-2"> Ut fringilla lacus ac tempor ullamcorper. Mauris iaculis placerat ex et mattis. Mauris id vulputate lectus, id fermentum sapien.
-                            </p>
-
-                            <!-- <a href="#" class="tm-btn text-uppercase">Read More</a> -->
-
-                        </div>
-                    </div>
-                    
-
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
-
-                        <div class="tm-2-col-right">
-
-                            <div class="tm-2-rows-md-swap">
-                                <div class="tm-overflow-auto row tm-2-rows-md-down-2">
-                                  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                                        <h3 class="tm-gold-text tm-title">
+</div>
+<div class="container">
+    <div class="row tm-margin-t-big">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+            <div class="tm-2-col-left">
+                <h3 class="tm-gold-text tm-title">{{post.title}}</h3>
+                <p class="tm-margin-b-30">最人气文章</p>
+                <img src="{% static 'storage' %}/{{post.pic}}" alt="Image" class="tm-margin-b-20 img-fluid" width="550">
+                <p>{{post.body}}</p>
+                <!-- <a href="#" class="tm-btn text-uppercase">Read More</a> -->
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+            <div class="tm-2-col-right">
+                <div class="tm-2-rows-md-swap">
+                    <div class="tm-overflow-auto row tm-2-rows-md-down-2">
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                            <h3 class="tm-gold-text tm-title">
                                             目录
                                         </h3>
-                                        <nav>
-                                            <ul class="nav">
-                                                {% for category in categories %}
-                                                <li><a href="#" class="tm-text-link">{{category.name|default:"暂无"}}</a></li>
-                                                {% endfor %}
-                                            </ul>
-                                        </nav>    
-                                    </div> <!-- col -->
-
-                                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-6 tm-xs-m-t">
-                                        <h3 class="tm-gold-text tm-title">
-                                            最近文章
-                                        </h3>
-                                        <nav>
-                                            <ul class="nav">
-                                            {% for post in posts %}
-                                                <li><a href="{{post.get_absolute_url}}" class="tm-text-link">{{post.title}}</a></li>
-                                            {% endfor %}
-                                            </ul>
-                                        </nav>    
-                                    </div> <!-- col -->
-                                </div>                        
-                                
-                                <div class="row tm-2-rows-md-down-1 tm-margin-t-mid">
-                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                                        <h3 class="tm-gold-text tm-title tm-margin-b-30">电影推荐</h3>
-                                        <div class="media tm-related-post">
-                                          <div class="media-left media-middle">
-                                            <a href="#">
-                                              <img class="media-object" src="{%static 'blogapp/images/tm-img-240x120-1.jpg'%}" alt="Generic placeholder image">
-                                            </a>
-                                          </div>
-                                          <div class="media-body">
-                                            <a href="#"><h4 class="media-heading tm-gold-text tm-margin-b-15">Lorem ipsum dolor</h4></a>
-                                            <p class="tm-small-font tm-media-description">Aenean cursus tellus mauris, quis consequat mauris dapibus id. Donec scelerisque porttitor pharetra.</p>
-                                          </div>
-                                        </div>
-                                        <div class="media tm-related-post">
-                                          <div class="media-left media-middle">
-                                            <a href="#">
-                                              <img class="media-object" src="{%static 'blogapp/images/tm-img-240x120-2.jpg'%}" alt="Generic placeholder image">
-                                            </a>
-                                          </div>
-                                          <div class="media-body">
-                                            <a href="#"><h4 class="media-heading tm-gold-text tm-margin-b-15">Lorem ipsum dolor</h4></a>
-                                            <p class="tm-small-font tm-media-description">Aenean cursus tellus mauris, quis consequat mauris dapibus id. Donec scelerisque porttitor pharetra.</p>
-                                          </div>
-                                        </div>
-                                        <div class="media tm-related-post">
-                                          <div class="media-left media-middle">
-                                            <a href="#">
-                                              <img class="media-object" src="{%static 'blogapp/images/tm-img-240x120-3.jpg'%}" alt="Generic placeholder image">
-                                            </a>
-                                          </div>
-                                          <div class="media-body">
-                                            <a href="#"><h4 class="media-heading tm-gold-text tm-margin-b-15">Lorem ipsum dolor</h4></a>
-                                            <p class="tm-small-font tm-media-description">Aenean cursus tellus mauris, quis consequat mauris dapibus id. Donec scelerisque porttitor pharetra.</p>
-                                          </div>
-                                        </div>
-                                    </div>
-                                </div>    
-                            </div>
-
+                            <nav>
+                                <ul class="nav">
+                                    {% for category in categories %}
+                                    <li><a href="#" class="tm-text-link">{{category.name}}({{category.post_num}})</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </nav>
                         </div>
-                        
+                        <!-- col -->
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-6 tm-xs-m-t">
+                            <h3 class="tm-gold-text tm-title">
+                                            最新文章
+                                        </h3>
+                            <nav>
+                                <ul class="nav">
+                                    {% for post in posts %}
+                                    <li><a href="{{post.get_absolute_url}}" class="tm-text-link">{{post.title}}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </nav>
+                        </div>
+                        <!-- col -->
                     </div>
-                </div> <!-- row -->
+                    <div class="row tm-2-rows-md-down-1 tm-margin-t-mid">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <h3 class="tm-gold-text tm-title tm-margin-b-30">电影推荐</h3>
+                            <h4 align="right"><a href="#"><span class="glyphicon glyphicon-repeat"></span></a></h4>
+                            <div class="media tm-related-post">
+                                <div class="media-left media-middle">
+                                    <a href="#">
+                                        <img class="media-object" src="{%static 'blogapp/images/tm-img-240x120-1.jpg'%}" alt="Generic placeholder image">
+                                    </a>
+                                </div>
+                                <div class="media-body">
+                                    <a href="#"><h4 class="media-heading tm-gold-text tm-margin-b-15">Lorem ipsum dolor</h4></a>
+                                    <p class="tm-small-font tm-media-description">Aenean cursus tellus mauris, quis consequat mauris dapibus id. Donec scelerisque porttitor pharetra.</p>
+                                </div>
+                            </div>
+                            <div class="media tm-related-post">
+                                <div class="media-left media-middle">
+                                    <a href="#">
+                                        <img class="media-object" src="{%static 'blogapp/images/tm-img-240x120-2.jpg'%}" alt="Generic placeholder image">
+                                    </a>
+                                </div>
+                                <div class="media-body">
+                                    <a href="#"><h4 class="media-heading tm-gold-text tm-margin-b-15">Lorem ipsum dolor</h4></a>
+                                    <p class="tm-small-font tm-media-description">Aenean cursus tellus mauris, quis consequat mauris dapibus id. Donec scelerisque porttitor pharetra.</p>
+                                </div>
+                            </div>
+                            <div class="media tm-related-post">
+                                <div class="media-left media-middle">
+                                    <a href="#">
+                                        <img class="media-object" src="{%static 'blogapp/images/tm-img-240x120-3.jpg'%}" alt="Generic placeholder image">
+                                    </a>
+                                </div>
+                                <div class="media-body">
+                                    <a href="#"><h4 class="media-heading tm-gold-text tm-margin-b-15">Lorem ipsum dolor</h4></a>
+                                    <p class="tm-small-font tm-media-description">Aenean cursus tellus mauris, quis consequat mauris dapibus id. Donec scelerisque porttitor pharetra.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-     <script src="{%static 'blogapp/js/tether.min.js'%}"></script>
+        </div>
+    </div>
+    <!-- row -->
+</div>
 {% endblock %}

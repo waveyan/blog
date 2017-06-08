@@ -24,7 +24,7 @@ class Post(models.Model):
     title=models.CharField('题目',max_length=70)
     body=models.TextField('文章')
     created_time=models.DateTimeField('创作时间')
-    modified_time=models.DateTimeField('最后修改时间')
+    modified_time=models.DateTimeField('最后修改时间',auto_now_add=True)
     #摘要blank=True,允许空值
     excerpt=models.CharField('摘要',max_length=200,blank=True)
     #这里赋值时直接用Category对象初始化
@@ -35,6 +35,8 @@ class Post(models.Model):
     author=models.ForeignKey(User)
     #admin管理会自动存于django的settings.py文件中定义的变量MEDIA_ROOT路径下
     pic=models.FileField(blank=True)
+    #访问数量,只允许正整数或0
+    read=models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return self.title
@@ -42,6 +44,20 @@ class Post(models.Model):
     def get_absolute_url(self):
         '''相当于url_for,自带pk,kwargs可随意，只要是dict就可以'''
         return reverse('blogapp:detail',kwargs={'pk':self.pk})
+
+    def increase_read(self):
+        self.read+=1
+        #只更新read字段
+        self.save(update_fields=['read'])
+
+    #用在posts.html的目录循环出来的post中
+    #def comment_num(self):
+    #    return len(self.comment_set.all())
+
+    def save(self,*args,**kwargs):
+        '''自动生成摘要，取正文前50字'''
+        self.excerpt=self.body[:50]
+        super().save(*args,**kwargs)
 
     #python类有继承需要带括号，没有括号默认继承object类
     class Meta:

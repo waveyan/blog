@@ -156,7 +156,6 @@ h4 {
 .tm-text-link { 
 	color: #006699; 
 	line-height: 2.8;
-	text-decoration: underline;
 }
 .tm-overflow-auto { overflow: auto; }
 .tm-small-font { font-size: 1rem; }

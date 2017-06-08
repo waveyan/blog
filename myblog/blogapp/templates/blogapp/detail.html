@@ -1,84 +1,70 @@
-{% extends 'blogapp/base.html' %}
-{% load staticfiles %}
-
-
-{% block title %}
-每天一文
-{% endblock %}
-{% block script %}
-{# 相当super() #}
-{{block.super}}
+{% extends 'blogapp/base.html' %} {% load staticfiles %} {% block title %} 每天一文 {% endblock %} {% block script %} {# 相当super() #} {{block.super}}
 <style>
-p{
-text-indent: 2em; /*em是相对单位，2em即现在一个字大小的两倍*/
-text-align: justify;
-font-style: normal;
-line-height: 40px;
+p {
+    text-indent: 2em;
+    /*em是相对单位，2em即现在一个字大小的两倍*/
+    text-align: justify;
+    font-style: normal;
+    line-height: 40px;
 }
 </style>
-{% endblock %}
-{% block page_content %}
-	<div class="container">
-	  	 <section class="tm-section">
-            <div class="container-fluid">
-                <div class="row">
-
-                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9 col-xl-9">
-                        <div class="tm-blog-post">
-                            <h3 class="tm-gold-text">{{post.title}}</h3>
-                            {{post.excerpt}}
-                            <img src="{%static 'storage/'%}{{post.pic}}" alt="Image" class="img-fluid tm-img-post" width="750">
-                            <p>{{ post.body }}</p>
-                        </div>
-                <div class="contact-form">
-                <div class="col-md-12 contact-grid">
-                        <form action="{% url 'comments:post_comment' post.pk %}" method="POST">
-                            {% csrf_token %}
-                            {{commentform.text}}
-                            {{commentform.errors}}
-                            <input type="submit" name="submit" value="评论">
-                        </form>
-                </div>
-                </div><!--end contact-form-->
-                <h1></h1>
-                <div class="clearfix"> </div>
-                <hr class="tm-margin-t-small"> 
-                        {% for comment in comments %}
-                            <div class="tm-margin-t-small" align="left">
-                               <h4 class="tm-margin-b-20 tm-thin-font">来自 {{comment.city}} 的网友：{{comment.ip}}</h4>
-                                    <p class="tm-margin-b-30" align="left">{{comment.text}}</p>
-                            </div>
-                            <hr class="tm-margin-t-small">
-                            {% endfor %}
+{% endblock %} {% block page_content %}
+<div class="container">
+    <section class="tm-section">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9 col-xl-9">
+                    <div class="tm-blog-post">
+                        <h3 class="tm-gold-text">{{post.title}}</h3> {% for tag in post.tags.all %} {{tag}} {% endfor %}
+                        <br> 阅读:{{post.read}}&nbsp;&nbsp; 评论:{{post.comment_num}} {% if post.pic %}
+                        <img src="{%static 'storage/'%}{{post.pic}}" alt="Image" class="img-fluid tm-img-post" width="750"> {% endif %}
+                        <p>{{ post.body }}</p>
                     </div>
-
-                    <aside class="col-xs-12 col-sm-12 col-md-4 col-lg-3 col-xl-3 tm-aside-r">
-                        <div class="tm-aside-container">
-                            <h3 class="tm-gold-text tm-title">
+                    <div class="contact-form">
+                        <div class="col-md-12 contact-grid">
+                            <form action="{% url 'comments:post_comment' post.pk %}" method="POST">
+                                {% csrf_token %} {{commentform.text}} {{commentform.errors}}
+                                <input type="submit" name="submit" value="评论">
+                            </form>
+                        </div>
+                    </div>
+                    <!--end contact-form-->
+                    <h1></h1>
+                    <div class="clearfix"> </div>
+                    <hr class="tm-margin-t-small"> {% for comment in comments %}
+                    <div class="tm-margin-t-small" align="left">
+                        <h4 class="tm-margin-b-20 tm-thin-font">{{forloop.counter}}楼:&nbsp;来自 {{comment.city}} 的网友：{{comment.ip}}</h4>
+                        <p class="tm-margin-b-30" align="left">{{comment.text}}</p>
+                    </div>
+                    <hr class="tm-margin-t-small"> {% endfor %}
+                </div>
+                <aside class="col-xs-12 col-sm-12 col-md-4 col-lg-3 col-xl-3 tm-aside-r">
+                    <div class="tm-aside-container">
+                        <h3 class="tm-gold-text tm-title">
                                 目录
                             </h3>
-                            <nav>
-                                <ul class="nav">
+                        <nav>
+                            <ul class="nav">
                                 {% for category in categories %}
-                                    <li><a href="#" class="tm-text-link">{{category.name|default:"暂无"}}</a></li>
+                                <li><a href="#" class="tm-text-link">{{category.name|default:"暂无"}}</a></li>
                                 {% endfor %}
-                                </ul>
-                            </nav>
-                            <hr class="tm-margin-t-small">   
-                            <h3 class="tm-gold-text tm-title tm-margin-t-small">
+                            </ul>
+                        </nav>
+                        <hr class="tm-margin-t-small">
+                        <h3 class="tm-gold-text tm-title tm-margin-t-small">
                                 最近文章
                             </h3>
-                            <nav>   
-                                <ul class="nav">
+                        <nav>
+                            <ul class="nav">
                                 {% for p in posts %}
-                                    <li><a href="{{post.get_absolute_url}}" class="tm-text-link">{{p.title}}</a></li>
+                                <li><a href="{{post.get_absolute_url}}" class="tm-text-link">{{p.title}}</a></li>
                                 {% endfor %}
-                                </ul>
-                            </nav>   
-                        </div>
-                    </aside>
-                </div>
+                            </ul>
+                        </nav>
+                    </div>
+                </aside>
             </div>
-        </section>
         </div>
+    </section>
+</div>
 {% endblock %}
