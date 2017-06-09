@@ -1,4 +1,4 @@
-{% extends 'blogapp/base.html' %} {% load staticfiles %} {% block title %} 每天一文 {% endblock %} {% block script %} {# 相当super() #} {{block.super}}
+{% extends 'blogapp/base.html' %} {% load staticfiles %} {% block title %} 文章 {% endblock %} {% block script %} {# 相当super() #} {{block.super}}
 <style>
 p {
     text-indent: 2em;
@@ -22,7 +22,8 @@ p {
                     </div>
                     <div class="contact-form">
                         <div class="col-md-12 contact-grid">
-                            <form action="{% url 'comments:post_comment' post.pk %}" method="POST">
+                            <form action="{% url 'comments:post_comment' post.pk %}
+" method="POST">
                                 {% csrf_token %} {{commentform.text}} {{commentform.errors}}
                                 <input type="submit" name="submit" value="评论">
                             </form>

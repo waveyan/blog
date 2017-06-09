@@ -26,28 +26,34 @@ def detail(request,pk):
     return render(request,'blogapp/detail.html',context)
 
 #功能与detail一致
-class DetailView(DetailView):
+class PostDetailView(DetailView):
     model=Post
     template_name='blogapp/detail.html'
     context_object_name='post'
 
-    #重写,这是DetailView最后调用的,会调用其他DetailView的内置函数
-    def get(self,request,*args,**kwargs):
-        #调用父类的get DetailView才会根据url的pk,调用get_object找到相应的post,即self.object
-        response=super().get(self,request,*arg,**kwargs)
-        #阅读量
-        self.object.increase_read()
-        #返回一个HttpResponse
-        return response
+   # #重写,这是DetailView最后调用的,会调用其他DetailView的内置函数
+   # def get(self,request,*args,**kwargs):
+   #     #调用父类的get DetailView才会根据url的pk,调用get_object找到相应的post,即self.object
+   #     response=super().get(self,request,*args,**kwargs)
+   #     #阅读量
+   #     self.object.increase_read()
+   #     print(response)
+   #     #返回一个HttpResponse
+   #     return response
 
-    #def get_object
+    def get_object(self,queryset=None):
+        #post=super().get_object(queryset=None)
+        post=Post.objects.annotate(comment_num=Count('comment')).get(pk=self.kwargs.get('pk'))
+        post.increase_read()
+        return post
 
     #重写，也会自动被get调用
     def get_context_data(self,**kwargs):
         context=super().get_context_data(**kwargs)
         posts=Post.objects.all()[:6]
         categories=Category.objects.all()
-        comments=post.comment_set.all()
+        #self.kwargs与参数的kwargs不是同一个
+        comments=Post.objects.get(pk=self.kwargs.get('pk')).comment_set.all()
         commentform=CommentForm()
         #post自动了
         context.update({
@@ -56,6 +62,7 @@ class DetailView(DetailView):
             'commentform':commentform,
             'posts':posts,
         })
+        return context
 
 
 
