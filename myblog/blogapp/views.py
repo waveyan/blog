@@ -3,6 +3,8 @@ from .models import Post,Category
 from comments.forms import CommentForm
 from django.db.models.aggregates import Count
 from django.views.generic import ListView,DetailView
+from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
+from myblog.settings import PER_PAGE
 
 def index(request):
     categories=Category.objects.annotate(post_num=Count('post')).all()
@@ -69,9 +71,19 @@ class PostDetailView(DetailView):
 
 
 def posts(request):
-    posts=Post.objects.annotate(comment_num=Count('comment')).all()
+    posts_list=Post.objects.annotate(comment_num=Count('comment')).all()
+    #分页：每页pages篇
+    paginator=Paginator(posts_list,PER_PAGE)
+    page=request.GET.get('page')
+    try:
+        p=paginator.page(page)
+    except PageNotAnInteger:
+        p=paginator.page(1)
+    except Emptypage:
+        p=paginator.page(paginator.num_pages)
+    is_paginated=lambda:paginator.num_pages>1
     categories=Category.objects.annotate(post_num=Count('post')).all()
-    context={'categories':categories,'posts':posts}
+    context={'categories':categories,'posts':p.object_list,'is_paginated':is_paginated,'page_obj':p,'paginator':paginator}
     return render(request,'blogapp/posts.html',context)
 
 def get_posts_with_category(request,pk):
@@ -87,6 +99,8 @@ class CategoryView(ListView):
     template_name='blogapp/posts.html'
     #post列表在context的name
     context_object_name='posts'
+    #每页数量，已向模版传递了paginator、page_obj、is_paginated、object_list参数
+    paginate_by=PER_PAGE
 
     #重写get_queryset,表示如何获取这个posts列表
     def get_queryset(self):
@@ -101,7 +115,7 @@ class CategoryView(ListView):
         #post list交由ListView获取了，我自己获取categories
         context=super().get_context_data(**kwargs)
         categories=Category.objects.annotate(post_num=Count('post')).all()
-        context.update({'categories':categories})
+        context.update({'categories':categories,'cate':'i am category'})
         return context
 
 
