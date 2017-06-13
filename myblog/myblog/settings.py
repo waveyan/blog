@@ -18,6 +18,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 #分页，每一页显示多少文章
 PER_PAGE=8
 
+#为Django认证系统指定model
+AUTH_USER_MODEL='users.User'
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
@@ -42,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blogapp',
     'comments',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -81,7 +85,7 @@ WSGI_APPLICATION = 'myblog.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'blog',
+        'NAME': 'myblog',
         'USER': 'root',
         'PASSWORD':'mysql',
         'HOST':'localhost',

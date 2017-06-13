@@ -1,6 +1,7 @@
 from django.db import models
 #Django内置应用，专门用于处理网站用户的注册、登陆等流程。
-from django.contrib.auth.models import User
+#from django.contrib.auth.models import User
+from users.models import User
 from django.core.urlresolvers import reverse
 
 #文章类别，id不写，自动生成,默认为主键

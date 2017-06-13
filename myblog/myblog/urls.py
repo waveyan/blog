@@ -21,4 +21,5 @@ urlpatterns = [
     #r''默认目录，即访问127.0.0.1:8000即可
     url(r'',include('blogapp.urls',namespace='blogapp')),
     url(r'',include('comments.urls',namespace='comments')),
+    url(r'',include('users.urls',namespace='users'))
 ]

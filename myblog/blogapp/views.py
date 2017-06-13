@@ -5,11 +5,17 @@ from django.db.models.aggregates import Count
 from django.views.generic import ListView,DetailView
 from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 from myblog.settings import PER_PAGE
+import markdown
 
 def index(request):
     categories=Category.objects.annotate(post_num=Count('post')).all()
     posts=Post.objects.all()[:6]
     post=Post.objects.order_by('-read').first()
+    post.body=markdown.markdown(post.body,extensions=[
+        'markdown.extensions.extra',
+        'markdown.extensions.codehilite',
+        'markdown.extensions.toc',
+    ])
     context={'categories':categories,'posts':posts,'post':post}
     #template在static文件夹中作参考
     return render(request,'blogapp/index.html',context)
@@ -47,6 +53,14 @@ class PostDetailView(DetailView):
         #post=super().get_object(queryset=None)
         post=Post.objects.annotate(comment_num=Count('comment')).get(pk=self.kwargs.get('pk'))
         post.increase_read()
+        #Markdown,目前能做的且推荐做的是使用外链引入图片。比如将图片上传到七牛云这样的云存储服务器，然后通过
+        #Markdown 的图片语法将图片引入。Markdown
+        #引入图片的语法为：![图片说明](图片链接)。
+        post.body=markdown.markdown(post.body,extensions=[
+            'markdown.extensions.extra',
+            'markdown.extensions.codehilite',
+            'markdown.extensions.toc',
+         ])
         return post
 
     #重写，也会自动被get调用
@@ -115,7 +129,7 @@ class CategoryView(ListView):
         #post list交由ListView获取了，我自己获取categories
         context=super().get_context_data(**kwargs)
         categories=Category.objects.annotate(post_num=Count('post')).all()
-        context.update({'categories':categories,'cate':'i am category'})
+        context.update({'categories':categories})
         return context
 
 

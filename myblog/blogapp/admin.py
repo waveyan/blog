@@ -19,7 +19,7 @@ class CategoryAdmin(admin.ModelAdmin):
     list_filter=['id']
 
 class PostAdmin(admin.ModelAdmin):
-    inlines=[CommentInline]
+    #inlines=[CommentInline]
     search_fields=['title','author']
     list_display=['title','excerpt','created_time','modified_time']
     list_filter=['created_time','modified_time']

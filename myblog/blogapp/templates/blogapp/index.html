@@ -1,4 +1,14 @@
-{# 都是以template为参考点 #} {% extends 'blogapp/base.html' %} {%load staticfiles%} {# 载入自定义标签mytags.py #} {%load mytags %} {% block title %} 首页 {% endblock %} {% block nav %}
+{# 都是以template为参考点 #} {% extends 'blogapp/base.html' %} {%load staticfiles%} {# 载入自定义标签mytags.py #} {%load mytags %} {% block title %} 首页 {% endblock %} {% block script %} {# 相当super() #} {{block.super}}
+<style>
+p {
+    text-indent: 2em;
+    /*em是相对单位，2em即现在一个字大小的两倍*/
+    text-align: justify;
+    font-style: normal;
+    line-height: 40px;
+}
+</style>
+{% endblock %}{% block nav %}
 <div class="header">
     <div class="container">
         <!---start-top-nav---->
@@ -19,7 +29,7 @@
                     <!-- logo -->
                     <li><a href="faq.html">Faq</a></li>
                     <li><a href="typography.html">Services</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="{% url 'users:register' %}">登录</a></li>
                 </ul>
             </nav>
             <div class="clearfix"> </div>
@@ -80,10 +90,9 @@
     <div class="row tm-margin-t-big">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
             <div class="tm-2-col-left">
-                <h3 class="tm-gold-text tm-title">{{post.title}}</h3>
-                <p class="tm-margin-b-30">最人气文章</p>
-                <img src="{% static 'storage' %}/{{post.pic}}" alt="Image" class="tm-margin-b-20 img-fluid" width="550">
-                <p>{{post.body}}</p>
+                <h3 class="tm-gold-text tm-title" style="display: inline;">{{post.title}}</h3> 最人气文章 {% if post.pic %}
+                <img src="{% static 'storage' %}/{{post.pic}}" alt="Image" class="tm-margin-b-20 img-fluid" width="550"> {% endif %}
+                <p>{{post.body|safe}}</p>
                 <!-- <a href="#" class="tm-btn text-uppercase">Read More</a> -->
             </div>
         </div>
