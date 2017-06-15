@@ -29,7 +29,11 @@ p {
                     <!-- logo -->
                     <li><a href="faq.html">Faq</a></li>
                     <li><a href="typography.html">Services</a></li>
-                    <li><a href="{% url 'users:register' %}">登录</a></li>
+                    {% if user.is_authenticated %}
+                    <li><a href="{% url 'users:logout' %}">{{user.nickname}}</a></li>
+                    {% else %}
+                    <li><a href="{% url 'users:login' %}">登录</a></li>
+                    {% endif %}
                 </ul>
             </nav>
             <div class="clearfix"> </div>

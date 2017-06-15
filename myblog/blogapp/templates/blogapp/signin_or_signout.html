@@ -1,4 +1,4 @@
-{% extends 'blogapp/base.html' %} {% load staticfiles %} {% block title %} 注册 {% endblock %} {% block script %} {{block.super}}
+{% extends 'blogapp/base.html' %} {% load staticfiles %} {% block title %} {{title}} {% endblock %} {% block script %} {{block.super}}
 <style type="text/css">
 .register-form input[type="text"],
 input[type="password"],
@@ -42,15 +42,17 @@ input[type="email"] {
         </p>
         <div class="register-form">
             <div class="col-md-6 contact-grid">
-                <h3>注册</h3>
-                <form action={% url 'users:register' %} method="POST">
-                    {% csrf_token %} {% for field in registerform %} {{field.label_tag}} {{field}}
+                <h3>{{title}}</h3>
+                <form action={{action_url}}?next_to={{request.GET.next_to}} method="POST">
+                    {% if messages %} {% for message in messages %}
+                    <div class="alert alert-danger">{{message}}</div>
+                    {% endfor %} {% endif %} {% csrf_token %} {% for field in form %} {{field.label_tag}} {{field}}
                     <font style="color: red;">{{field.errors}} </font>{% if field.help_text %}
                     <p>{{field.help_text|safe}}</p>
                     {% endif %}
-                    <br>{% endfor %}
+                    <br>{% endfor %} {% if register_html %} {{register_html|safe}}{% endif %}
                     <div class="send">
-                        <input type="submit" value="注册">
+                        <input type="submit" value="{{title}}">
                     </div>
                 </form>
             </div>
